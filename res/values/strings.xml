@@ -115,6 +115,8 @@
     <string name="menu_gestures">Gestures</string>
     <!-- Noun, menu item used to show the system settings -->
     <string name="menu_settings">Settings</string>
+    <!-- Start of Preferences of Launcher2 -->
+    <string name="launcher_settings">L2 Edit</string>
 
     <!-- Permissions: -->
     <skip />
@@ -150,5 +152,11 @@
          by the client-id, e.g. "android-google". -->
     <string name="default_browser_url" translatable="false">
         http://www.google.com/m?client=ms-{CID}&amp;source=android-home-hotseat</string>
+
+    <!--  Preferences  -->
+    <string name="launcher_general_settings">Launcher General Settings</string>
+    <string name="ui_launcher_settings">UI Settings</string>
+    <string name="pref_2d_launcher_setting">3D Toggle</string>
+    <string name="pref_2d_launcher_setting_summary">Note: This doesn\'t work yet. This is a work in progress</string>
 
 </resources>

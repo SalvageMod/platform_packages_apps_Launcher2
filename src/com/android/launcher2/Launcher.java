@@ -110,6 +110,7 @@ public final class Launcher extends Activity
     private static final int MENU_SEARCH = MENU_WALLPAPER_SETTINGS + 1;
     private static final int MENU_NOTIFICATIONS = MENU_SEARCH + 1;
     private static final int MENU_SETTINGS = MENU_NOTIFICATIONS + 1;
+    private static final int LAUNCHER_SETTINGS = MENU_SETTINGS + 1;
 
     private static final int REQUEST_CREATE_SHORTCUT = 1;
     private static final int REQUEST_CREATE_LIVE_FOLDER = 4;
@@ -1128,9 +1129,15 @@ public final class Launcher extends Activity
         settings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
+        final Intent launcher = new Intent().setClass(this, LauncherPreferenceActivity.class);
+
         menu.add(0, MENU_SETTINGS, 0, R.string.menu_settings)
                 .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
                 .setIntent(settings);
+
+        menu.add(0, LAUNCHER_SETTINGS, 0, R.string.launcher_settings)
+                .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
+                .setIntent(launcher);
 
         return true;
     }
