@@ -48,6 +48,22 @@ class ApplicationInfo extends ItemInfo {
     Intent intent;
 
     /**
+     * The application icon.
+     */
+    Drawable icon;
+
+    /**
+     * When set to true, indicates that the icon has been resized.
+     */
+    boolean filtered;
+
+    /**
+     * Indicates whether the icon comes from an application's resource (if false)
+     * or from a custom Bitmap (if true.)
+     */
+    boolean customIcon;
+
+    /**
      * A bitmap version of the application icon.
      */
     Bitmap iconBitmap;
@@ -73,12 +89,22 @@ class ApplicationInfo extends ItemInfo {
 
         iconCache.getTitleAndIcon(this, info);
     }
+
+    Intent.ShortcutIconResource iconResource;
     
     public ApplicationInfo(ApplicationInfo info) {
         super(info);
         componentName = info.componentName;
         title = info.title.toString();
         intent = new Intent(info.intent);
+        if (info.iconResource != null) {
+            iconResource = new Intent.ShortcutIconResource();
+            iconResource.packageName = info.iconResource.packageName;
+            iconResource.resourceName = info.iconResource.resourceName;
+        }
+        icon = info.icon;
+        filtered = info.filtered;
+        customIcon = info.customIcon;
     }
 
     /**
