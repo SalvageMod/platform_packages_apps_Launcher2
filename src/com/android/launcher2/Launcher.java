@@ -107,8 +107,7 @@ public final class Launcher extends Activity
     private static final int MENU_ADD = Menu.FIRST + 1;
     private static final int MENU_MANAGE_APPS = MENU_ADD + 1;
     private static final int MENU_WALLPAPER_SETTINGS = MENU_MANAGE_APPS + 1;
-    private static final int MENU_SEARCH = MENU_WALLPAPER_SETTINGS + 1;
-    private static final int MENU_NOTIFICATIONS = MENU_SEARCH + 1;
+    private static final int MENU_NOTIFICATIONS = MENU_WALLPAPER_SETTINGS + 1;
     private static final int MENU_SETTINGS = MENU_NOTIFICATIONS + 1;
     private static final int LAUNCHER_SETTINGS = MENU_SETTINGS + 1;
 
@@ -1118,9 +1117,6 @@ public final class Launcher extends Activity
         menu.add(MENU_GROUP_WALLPAPER, MENU_WALLPAPER_SETTINGS, 0, R.string.menu_wallpaper)
                  .setIcon(android.R.drawable.ic_menu_gallery)
                  .setAlphabeticShortcut('W');
-        menu.add(0, MENU_SEARCH, 0, R.string.menu_search)
-                .setIcon(android.R.drawable.ic_search_category_default)
-                .setAlphabeticShortcut(SearchManager.MENU_KEY);
         menu.add(0, MENU_NOTIFICATIONS, 0, R.string.menu_notifications)
                 .setIcon(com.android.internal.R.drawable.ic_menu_notifications)
                 .setAlphabeticShortcut('N');
@@ -1177,9 +1173,6 @@ public final class Launcher extends Activity
                 return true;
             case MENU_WALLPAPER_SETTINGS:
                 startWallpaper();
-                return true;
-            case MENU_SEARCH:
-                onSearchRequested();
                 return true;
             case MENU_NOTIFICATIONS:
                 showNotifications();
