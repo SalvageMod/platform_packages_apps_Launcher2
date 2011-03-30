@@ -104,8 +104,7 @@ public final class Launcher extends Activity
     private static final int MENU_GROUP_ADD = 1;
     private static final int MENU_GROUP_WALLPAPER = MENU_GROUP_ADD + 1;
 
-    private static final int MENU_ADD = Menu.FIRST + 1;
-    private static final int MENU_MANAGE_APPS = MENU_ADD + 1;
+    private static final int MENU_MANAGE_APPS = Menu.FIRST + 1;
     private static final int MENU_WALLPAPER_SETTINGS = MENU_MANAGE_APPS + 1;
     private static final int MENU_NOTIFICATIONS = MENU_WALLPAPER_SETTINGS + 1;
     private static final int MENU_SETTINGS = MENU_NOTIFICATIONS + 1;
@@ -1108,9 +1107,6 @@ public final class Launcher extends Activity
 
         super.onCreateOptionsMenu(menu);
 
-        menu.add(MENU_GROUP_ADD, MENU_ADD, 0, R.string.menu_add)
-                .setIcon(android.R.drawable.ic_menu_add)
-                .setAlphabeticShortcut('A');
         menu.add(0, MENU_MANAGE_APPS, 0, R.string.menu_manage_apps)
                 .setIcon(android.R.drawable.ic_menu_manage)
                 .setAlphabeticShortcut('M');
@@ -1165,9 +1161,6 @@ public final class Launcher extends Activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_ADD:
-                addItems();
-                return true;
             case MENU_MANAGE_APPS:
                 manageApps();
                 return true;
