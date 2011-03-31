@@ -18,6 +18,9 @@ package com.android.launcher2;
 
 import com.android.common.Search;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -218,6 +221,8 @@ public final class Launcher extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       boolean persist=SalvageLauncherHelper.getSystemPersistent(this);
+       setPersistent(persist);	
 
         LauncherApplication app = ((LauncherApplication)getApplication());
         mModel = app.setLauncher(this);
@@ -254,7 +259,6 @@ public final class Launcher extends Activity
         if (!mRestoring) {
             mModel.startLoader(this, true);
         }
-
         // For handling default keys
         mDefaultKeySsb = new SpannableStringBuilder();
         Selection.setSelection(mDefaultKeySsb, 0);
@@ -1049,6 +1053,7 @@ public final class Launcher extends Activity
 
     @Override
     public void onDestroy() {
+        setPersistent(false);
         super.onDestroy();
 
         try {

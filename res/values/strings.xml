@@ -156,7 +156,7 @@
     <!--  Preferences  -->
     <string name="launcher_general_settings">Launcher General Settings</string>
     <string name="ui_launcher_settings">UI Settings</string>
-    <string name="pref_2d_launcher_setting">3D Toggle</string>
-    <string name="pref_2d_launcher_setting_summary">Note: This doesn\'t work yet. This is a work in progress</string>
+    <string name="pref_title_system_persistent">System persistent</string>
+    <string name="pref_summary_system_persistent">Enable this to avoid system killing the launcher</string>
 
 </resources>
