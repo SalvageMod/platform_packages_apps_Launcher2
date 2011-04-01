@@ -85,18 +85,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.android.launcher2.WallpaperChooser"
-            android:label="@string/pick_wallpaper"
-            android:icon="@drawable/ic_launcher_wallpaper"
-            android:screenOrientation="nosensor"
-            android:finishOnCloseSystemDialogs="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SET_WALLPAPER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="com.android.launcher2.LauncherPreferenceActivity"
             android:label="@string/launcher_settings">
             <intent-filter>
