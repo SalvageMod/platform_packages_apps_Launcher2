@@ -46,6 +46,8 @@ import android.view.ViewParent;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 import android.widget.TextView;
+import com.sm.launcher.CustomScroller;
+import com.sm.launcher.ElasticInterpolator;
 
 import com.android.launcher.R;
 
@@ -72,7 +74,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     private int mCurrentScreen;
     private int mNextScreen = INVALID_SCREEN;
-    private Scroller mScroller;
+    private CustomScroller mScroller;
     private VelocityTracker mVelocityTracker;
 
     /**
@@ -190,7 +192,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     private void initWorkspace() {
         Context context = getContext();
         mScrollInterpolator = new WorkspaceOvershootInterpolator();
-        mScroller = new Scroller(context, mScrollInterpolator);
+        mScroller = new CustomScroller(getContext(), new ElasticInterpolator(5f));
         mCurrentScreen = mDefaultScreen;
         Launcher.setScreen(mCurrentScreen);
         LauncherApplication app = (LauncherApplication)context.getApplicationContext();
