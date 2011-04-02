@@ -116,7 +116,7 @@
     <!-- Noun, menu item used to show the system settings -->
     <string name="menu_settings">Settings</string>
     <!-- Start of Preferences of Launcher2 -->
-    <string name="launcher_settings">L2 Edit</string>
+    <string name="launcher_settings">Configure</string>
 
     <!-- Permissions: -->
     <skip />
