@@ -1118,6 +1118,12 @@ public final class Launcher extends Activity
         menu.add(MENU_GROUP_WALLPAPER, MENU_WALLPAPER_SETTINGS, 0, R.string.menu_wallpaper)
                  .setIcon(android.R.drawable.ic_menu_gallery)
                  .setAlphabeticShortcut('W');
+
+        final Intent launcher = new Intent().setClass(this, LauncherPreferenceActivity.class);
+        menu.add(0, LAUNCHER_SETTINGS, 0, R.string.launcher_settings)
+                .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
+                .setIntent(launcher);
+
         menu.add(0, MENU_NOTIFICATIONS, 0, R.string.menu_notifications)
                 .setIcon(com.android.internal.R.drawable.ic_menu_notifications)
                 .setAlphabeticShortcut('N');
@@ -1126,15 +1132,9 @@ public final class Launcher extends Activity
         settings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
-        final Intent launcher = new Intent().setClass(this, LauncherPreferenceActivity.class);
-
         menu.add(0, MENU_SETTINGS, 0, R.string.menu_settings)
                 .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
                 .setIntent(settings);
-
-        menu.add(0, LAUNCHER_SETTINGS, 0, R.string.launcher_settings)
-                .setIcon(android.R.drawable.ic_menu_preferences).setAlphabeticShortcut('P')
-                .setIntent(launcher);
 
         return true;
     }
