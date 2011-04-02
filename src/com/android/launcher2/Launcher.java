@@ -109,9 +109,9 @@ public final class Launcher extends Activity
 
     private static final int MENU_MANAGE_APPS = Menu.FIRST + 1;
     private static final int MENU_WALLPAPER_SETTINGS = MENU_MANAGE_APPS + 1;
-    private static final int MENU_NOTIFICATIONS = MENU_WALLPAPER_SETTINGS + 1;
+    private static final int LAUNCHER_SETTINGS = MENU_WALLPAPER_SETTINGS + 1;
+    private static final int MENU_NOTIFICATIONS = LAUNCHER_SETTINGS + 1;
     private static final int MENU_SETTINGS = MENU_NOTIFICATIONS + 1;
-    private static final int LAUNCHER_SETTINGS = MENU_SETTINGS + 1;
 
     private static final int REQUEST_CREATE_SHORTCUT = 1;
     private static final int REQUEST_CREATE_LIVE_FOLDER = 4;
