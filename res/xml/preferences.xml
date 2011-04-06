@@ -17,4 +17,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory 
+        android:title="@string/pref_icon_settings">
+ 
+    <CheckBoxPreference android:key="pref_key_launcher_hide_labels"
+       android:title="@string/pref_title_hide_labels"
+       android:summary="@string/pref_summary_hide_labels"
+       android:defaultValue="false" />
+
+     </PreferenceCategory>
+
 </PreferenceScreen>

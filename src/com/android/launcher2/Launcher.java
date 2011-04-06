@@ -189,6 +189,8 @@ public final class Launcher extends Activity
 
     private Bundle mSavedState;
 
+    private SharedPreferences mPrefs;
+
     private SpannableStringBuilder mDefaultKeySsb = null;
 
     private boolean mWorkspaceLoading = true;
@@ -230,6 +232,7 @@ public final class Launcher extends Activity
         mDragController = new DragController(this);
         mInflater = getLayoutInflater();
 
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mAppWidgetManager = AppWidgetManager.getInstance(this);
         mAppWidgetHost = new LauncherAppWidgetHost(this, APPWIDGET_HOST_ID);
         mAppWidgetHost.startListening();
@@ -848,7 +851,9 @@ public final class Launcher extends Activity
         favorite.setCompoundDrawablesWithIntrinsicBounds(null,
                 new FastBitmapDrawable(info.getIcon(mIconCache)),
                 null, null);
-        favorite.setText(info.title);
+        if (!mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_HIDE_LABELS, false) || (mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_SHOW_SHORTCUTS_LABEL, true) && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT)) {
+      favorite.setText(info.title);
+}
         favorite.setTag(info);
         favorite.setOnClickListener(this);
 

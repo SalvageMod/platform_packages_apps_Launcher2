@@ -32,15 +32,18 @@ import android.preference.PreferenceManager;
 import android.preference.CheckBoxPreference;
 import android.content.Context;
 import android.view.View;
-import 	android.util.Log;
+import android.util.Log;
 
 import com.android.launcher.R;
 
 public class LauncherPreferenceActivity extends PreferenceActivity{
 
-    private static final String APPS2D_PREF = "pref_key_2d_setting";
+    public static final String LAUNCHER_HIDE_LABELS = "pref_key_launcher_hide_labels";
+    public static final String LAUNCHER_SHOW_SHORTCUTS_LABEL = "pref_key_launcher_show_shortcuts_label";
 
-    private CheckBoxPreference m2dSettingPref;
+   //private static final String APPS2D_PREF = "pref_key_2d_setting";
+
+   //private CheckBoxPreference m2dSettingPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
