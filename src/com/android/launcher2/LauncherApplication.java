@@ -30,7 +30,7 @@ public class LauncherApplication extends Application {
 
     @Override
     public void onCreate() {
-        VMRuntime.getRuntime().setMinimumHeapSize(4 * 1024 * 1024);
+        VMRuntime.getRuntime().setMinimumHeapSize(6 * 1024 * 1024);
 
         super.onCreate();
 
