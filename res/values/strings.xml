@@ -156,11 +156,9 @@
     <!--  Preferences  -->
     <string name="launcher_general_settings">Launcher General Settings</string>
     <string name="ui_launcher_settings">UI Settings</string>
-    <string name="pref_icon_settings">Icons (Requires a restart)</string>
+    <string name="pref_icon_settings">Icons (must re-place icons)</string>
     <string name="pref_summary_hide_labels">Check to hide desktop icon labels</string>
     <string name="pref_title_hide_labels">Hide labels</string>
-    <string name="pref_title_system_persistent">System persistent</string>
-    <string name="pref_summary_system_persistent">Avoid system killing the launcher</string>
     <string name="pref_summary_launcher_fullscreen">Hide notification bar on homescreen</string>
     <string name="pref_title_launcher_fullscreen">Full screen launcher</string>
 
