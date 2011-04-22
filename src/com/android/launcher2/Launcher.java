@@ -599,6 +599,9 @@ public final class Launcher extends Activity
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		}
+
+        Workspace.WALLPAPER_SCROLLING = mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_WALLPAPER_SCROLLING, true);
+
         if (mRestoring || mOnResumeNeedsLoad) {
             mWorkspaceLoading = true;
             mModel.startLoader(this, true);

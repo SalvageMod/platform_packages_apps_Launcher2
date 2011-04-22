@@ -72,6 +72,8 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     private boolean mFirstLayout = true;
 
+    static public boolean WALLPAPER_SCROLLING = true;
+
     private int mCurrentScreen;
     private int mNextScreen = INVALID_SCREEN;
     private CustomScroller mScroller;
@@ -427,11 +429,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     }
 
     private void updateWallpaperOffset(int scrollRange) {
-        IBinder token = getWindowToken();
-        if (token != null) {
-            mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1), 0 );
-            mWallpaperManager.setWallpaperOffsets(getWindowToken(),
-                    Math.max(0.f, Math.min(mScrollX/(float)scrollRange, 1.f)), 0);
+    	if (Workspace.WALLPAPER_SCROLLING == true) {
+    		mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1), 0 );
+        	mWallpaperManager.setWallpaperOffsets(getWindowToken(), getScrollX() / (float) scrollRange, 0);
         }
     }
     

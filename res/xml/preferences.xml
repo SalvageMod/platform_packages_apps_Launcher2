@@ -9,6 +9,11 @@
        android:summary="@string/pref_summary_launcher_fullscreen"
        android:defaultValue="false" />
 
+    <CheckBoxPreference android:key="pref_key_launcher_wallpaper_scrolling"
+                        android:title="@string/pref_title_wallpaper_scrolling"
+                        android:summary="@string/pref_summary_wallpaper_scrolling"
+                        android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory 
