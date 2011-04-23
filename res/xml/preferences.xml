@@ -9,6 +9,13 @@
        android:summary="@string/pref_summary_launcher_fullscreen"
        android:defaultValue="false" />
 
+    <!-- Launcher orientation -->
+    <CheckBoxPreference 
+       android:key="pref_key_launcher_orientation"
+       android:title="@string/pref_title_orientation"
+       android:summary="@string/pref_sum_orientation"
+       android:defaultValue="false" />
+
     <CheckBoxPreference android:key="pref_key_launcher_wallpaper_scrolling"
                         android:title="@string/pref_title_wallpaper_scrolling"
                         android:summary="@string/pref_summary_wallpaper_scrolling"

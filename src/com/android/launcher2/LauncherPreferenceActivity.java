@@ -42,6 +42,7 @@ public class LauncherPreferenceActivity extends PreferenceActivity{
     public static final String LAUNCHER_SHOW_SHORTCUTS_LABEL = "pref_key_launcher_show_shortcuts_label";
     public static final String LAUNCHER_FULLSCREEN = "pref_key_launcher_fullscreen";
     public static final String LAUNCHER_WALLPAPER_SCROLLING = "pref_key_launcher_wallpaper_scrolling";
+    public static final String LAUNCHER_ORIENTATION = "pref_key_launcher_orientation";
 
    //private static final String APPS2D_PREF = "pref_key_2d_setting";
 

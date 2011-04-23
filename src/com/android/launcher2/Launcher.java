@@ -504,7 +504,7 @@ public final class Launcher extends Activity
                         break;
                     }
                 }
-                
+
                 if (!found) {
                     if (LOGD) Log.d(TAG, "Multiple options, no default yet");
                     // the bestMatch is probably the ResolveActivity, meaning the
@@ -594,11 +594,18 @@ public final class Launcher extends Activity
         super.onResume();
         mPaused = false;
 		if (mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_FULLSCREEN, false)) {
-        	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
+        	getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 	                                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		}
+		// launcher orientation
+		if (mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_ORIENTATION, false)) {
+			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+		} else {
+			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
+
 
         Workspace.WALLPAPER_SCROLLING = mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_WALLPAPER_SCROLLING, true);
 
