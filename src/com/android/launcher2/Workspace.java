@@ -434,9 +434,10 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     	if (Workspace.WALLPAPER_SCROLLING == true) {
     		mWallpaperManager.setWallpaperOffsetSteps(1.0f / (getChildCount() - 1), 0 );
         	mWallpaperManager.setWallpaperOffsets(getWindowToken(), getScrollX() / (float) scrollRange, 0);
+	    }
         }
     }
-    
+
     @Override
     public void scrollTo(int x, int y) {
         super.scrollTo(x, y);
