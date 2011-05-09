@@ -50,7 +50,7 @@ public class LiveFolderIcon extends FolderIcon {
         icon.setText(folderInfo.title);
         icon.setTag(folderInfo);
         icon.setOnClickListener(launcher);
-        
+
         return icon;
     }
 

@@ -40,7 +40,7 @@ public interface AllAppsView {
     public void removeApps(ArrayList<ApplicationInfo> list);
 
     public void updateApps(ArrayList<ApplicationInfo> list);
-    
+
     public void dumpState();
 
     public void surrender();

@@ -26,7 +26,7 @@
         <item name="android:windowEnterAnimation">@anim/fade_in_fast</item>
         <item name="android:windowExitAnimation">@anim/fade_out_fast</item>
     </style>
-    
+
     <style name="WorkspaceIcon">
         <item name="android:textSize">13dip</item>
         <item name="android:singleLine">true</item>

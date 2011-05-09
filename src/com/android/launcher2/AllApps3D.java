@@ -131,7 +131,7 @@ public class AllApps3D extends RSSurfaceView
     private boolean mSurrendered;
 
     private int mRestoreFocusIndex = -1;
-    
+
     @SuppressWarnings({"UnusedDeclaration"})
     static class Defines {
         public static final int ALLOC_PARAMS = 0;
@@ -402,7 +402,7 @@ public class AllApps3D extends RSSurfaceView
 
         if (iconCount > 0) {
             final boolean isPortrait = getWidth() < getHeight();
-            
+
             mArrowNavigation = true;
 
             int currentSelection = sRollo.mState.selectedIconIndex;
@@ -858,13 +858,13 @@ public class AllApps3D extends RSSurfaceView
         if (sRollo != null && reload) {
             sRollo.setApps(list);
         }
-        
+
         if (hasFocus() && mRestoreFocusIndex != -1) {
             sRollo.selectIcon(mRestoreFocusIndex, SELECTED_FOCUSED);
             sRollo.mState.save();
             mRestoreFocusIndex = -1;
         }
-        
+
         mLocks &= ~LOCK_ICONS_PENDING;
     }
 
@@ -1026,8 +1026,8 @@ public class AllApps3D extends RSSurfaceView
 
         private Bitmap mSelectionBitmap;
         private Canvas mSelectionCanvas;
-        
-        private float mScrollPos;        
+
+        private float mScrollPos;
 
         Params mParams;
         State mState;

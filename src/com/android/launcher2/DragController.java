@@ -128,23 +128,23 @@ public class DragController {
      * Interface to receive notifications when a drag starts or stops
      */
     interface DragListener {
-        
+
         /**
          * A drag has begun
-         * 
+         *
          * @param source An object representing where the drag originated
          * @param info The data associated with the object that is being dragged
          * @param dragAction The drag action: either {@link DragController#DRAG_ACTION_MOVE}
          *        or {@link DragController#DRAG_ACTION_COPY}
          */
         void onDragStart(DragSource source, Object info, int dragAction);
-        
+
         /**
          * The drag has eneded
          */
         void onDragEnd();
     }
-    
+
     /**
      * Used to create a new DragLayer from XML.
      *
@@ -158,7 +158,7 @@ public class DragController {
 
     /**
      * Starts a drag.
-     * 
+     *
      * @param v The view that is being dragged
      * @param source An object representing where the drag originated
      * @param dragInfo The data associated with the object that is being dragged
@@ -192,7 +192,7 @@ public class DragController {
 
     /**
      * Starts a drag.
-     * 
+     *
      * @param b The bitmap to display as the drag image.  It will be re-scaled to the
      *          enlarged size.
      * @param screenX The x position on screen of the left-top of the bitmap.
@@ -359,7 +359,7 @@ public class DragController {
      */
     void setMoveTarget(View view) {
         mMoveTarget = view;
-    }    
+    }
 
     public boolean dispatchUnhandledMove(View focused, int direction) {
         return mMoveTarget != null && mMoveTarget.dispatchUnhandledMove(focused, direction);

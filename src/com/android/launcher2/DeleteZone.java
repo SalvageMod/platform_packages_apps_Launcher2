@@ -24,13 +24,13 @@ import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.content.pm.PackageManager;	
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.net.Uri;
-import android.os.Handler;	
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation;
@@ -49,7 +49,7 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
     private static final int ANIMATION_DURATION = 200;
 
     private final int[] mLocation = new int[2];
-    
+
     private Launcher mLauncher;
     private boolean mTrashMode;
 
@@ -66,8 +66,8 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
     private View mHandle;
     private final Paint mTrashPaint = new Paint();
 
-    private boolean shouldUninstall=false;	
-    private Handler mHandler = new Handler();	
+    private boolean shouldUninstall=false;
+    private Handler mHandler = new Handler();
     private boolean mUninstallTarget=false;
     String UninstallPkg = null;
 
@@ -96,7 +96,7 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
             DragView dragView, Object dragInfo) {
         return true;
     }
-    
+
     public Rect estimateDropLocation(DragSource source, int x, int y, int xOffset, int yOffset,
             DragView dragView, Object dragInfo, Rect recycle) {
         return null;
@@ -190,15 +190,15 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
       if(item instanceof ApplicationInfo){
         final ApplicationInfo appInfo=(ApplicationInfo) item;
               if(appInfo.iconResource != null)
-          UninstallPkg = appInfo.iconResource.packageName;	
+          UninstallPkg = appInfo.iconResource.packageName;
         else
         {
           PackageManager mgr = DeleteZone.this.getContext().getPackageManager();
           ResolveInfo res = mgr.resolveActivity(appInfo.intent, 0);
           UninstallPkg = res.activityInfo.packageName;
         }
-      }  
-    }   
+      }
+    }
  }
 
     public void onDragEnd() {
@@ -213,7 +213,7 @@ public class DeleteZone extends ImageView implements DropTarget, DragController.
       Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, Uri.parse("package:"+UninstallPkg));
       DeleteZone.this.getContext().startActivity(uninstallIntent);
         }
-        
+
     }
 
     private void createAnimations() {

@@ -109,10 +109,10 @@ class LiveFolderAdapter extends CursorAdapter {
                     holder.description.setText(description);
                     holder.description.setVisibility(View.VISIBLE);
                 } else {
-                    holder.description.setVisibility(View.GONE);                    
+                    holder.description.setVisibility(View.GONE);
                 }
             } else {
-                holder.description.setVisibility(View.GONE);                
+                holder.description.setVisibility(View.GONE);
             }
         }
 

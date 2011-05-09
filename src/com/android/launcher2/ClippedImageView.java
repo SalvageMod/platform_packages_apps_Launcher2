@@ -32,7 +32,7 @@ public class ClippedImageView extends ImageView {
 
     public ClippedImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ClippedImageView, defStyle, 0);
 
         mZone = a.getDimensionPixelSize(R.styleable.ClippedImageView_ignoreZone, 0);

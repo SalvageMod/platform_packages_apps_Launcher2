@@ -64,11 +64,11 @@ public class LauncherProvider extends ContentProvider {
     private static final boolean LOGD = false;
 
     private static final String DATABASE_NAME = "launcher.db";
-    
+
     private static final int DATABASE_VERSION = 8;
 
     static final String AUTHORITY = "com.android.launcher2.settings";
-    
+
     static final String TABLE_FAVORITES = "favorites";
     static final String PARAMETER_NOTIFY = "notify";
 
@@ -79,7 +79,7 @@ public class LauncherProvider extends ContentProvider {
      */
     static final Uri CONTENT_APPWIDGET_RESET_URI =
             Uri.parse("content://" + AUTHORITY + "/appWidgetReset");
-    
+
     private SQLiteOpenHelper mOpenHelper;
 
     @Override
@@ -183,7 +183,7 @@ public class LauncherProvider extends ContentProvider {
         private static final String TAG_SEARCH = "search";
         private static final String TAG_APPWIDGET = "appwidget";
         private static final String TAG_SHORTCUT = "shortcut";
-        
+
         private final Context mContext;
         private final AppWidgetHost mAppWidgetHost;
 
@@ -207,7 +207,7 @@ public class LauncherProvider extends ContentProvider {
         @Override
         public void onCreate(SQLiteDatabase db) {
             if (LOGD) Log.d(TAG, "creating new launcher database");
-            
+
             db.execSQL("CREATE TABLE favorites (" +
                     "_id INTEGER PRIMARY KEY," +
                     "title TEXT," +
@@ -234,7 +234,7 @@ public class LauncherProvider extends ContentProvider {
                 mAppWidgetHost.deleteHost();
                 sendAppWidgetResetNotify();
             }
-            
+
             if (!convertDatabase(db)) {
                 // Populate favorites table with initial favorites
                 loadFavorites(db);
@@ -268,7 +268,7 @@ public class LauncherProvider extends ContentProvider {
                     resolver.delete(uri, null, null);
                 }
             }
-            
+
             if (converted) {
                 // Convert widgets from this import into widgets
                 if (LOGD) Log.d(TAG, "converted and now triggering widget upgrade");
@@ -338,7 +338,7 @@ public class LauncherProvider extends ContentProvider {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             if (LOGD) Log.d(TAG, "onUpgrade triggered");
-            
+
             int version = oldVersion;
             if (version < 3) {
                 // upgrade 1,2 -> 3 added appWidgetId column
@@ -355,7 +355,7 @@ public class LauncherProvider extends ContentProvider {
                 } finally {
                     db.endTransaction();
                 }
-                
+
                 // Convert existing widgets only if table upgrade was successful
                 if (version == 3) {
                     convertWidgets(db);
@@ -365,7 +365,7 @@ public class LauncherProvider extends ContentProvider {
             if (version < 4) {
                 version = 4;
             }
-            
+
             // Where's version 5?
             // - Donut and sholes on 2.0 shipped with version 4 of launcher1.
             // - Passion shipped on 2.1 with version 6 of launcher2
@@ -386,7 +386,7 @@ public class LauncherProvider extends ContentProvider {
                 } finally {
                     db.endTransaction();
                 }
-            
+
                // We added the fast track.
                 if (updateContactsShortcuts(db)) {
                     version = 6;
@@ -424,13 +424,13 @@ public class LauncherProvider extends ContentProvider {
                 // Select and iterate through each matching widget
                 c = db.query(TABLE_FAVORITES, new String[] { Favorites._ID, Favorites.INTENT },
                         selectWhere, null, null, null, null);
-                
+
                 if (LOGD) Log.d(TAG, "found upgrade cursor count=" + c.getCount());
-                
+
                 final ContentValues values = new ContentValues();
                 final int idIndex = c.getColumnIndex(Favorites._ID);
                 final int intentIndex = c.getColumnIndex(Favorites.INTENT);
-                
+
                 while (c != null && c.moveToNext()) {
                     long favoriteId = c.getLong(idIndex);
                     final String intentUri = c.getString(intentIndex);
@@ -455,18 +455,18 @@ public class LauncherProvider extends ContentProvider {
 
                                 values.clear();
                                 values.put(LauncherSettings.Favorites.INTENT, intent.toUri(0));
-    
+
                                 String updateWhere = Favorites._ID + "=" + favoriteId;
-                                db.update(TABLE_FAVORITES, values, updateWhere, null);                                
+                                db.update(TABLE_FAVORITES, values, updateWhere, null);
                             }
                         } catch (RuntimeException ex) {
                             Log.e(TAG, "Problem upgrading shortcut", ex);
                         } catch (URISyntaxException e) {
-                            Log.e(TAG, "Problem upgrading shortcut", e);                            
+                            Log.e(TAG, "Problem upgrading shortcut", e);
                         }
                     }
                 }
-                
+
                 db.setTransactionSuccessful();
             } catch (SQLException ex) {
                 Log.w(TAG, "Problem while upgrading contacts", ex);
@@ -535,7 +535,7 @@ public class LauncherProvider extends ContentProvider {
                     c.close();
                 }
             }
-            
+
         }
 
         /**
@@ -551,17 +551,17 @@ public class LauncherProvider extends ContentProvider {
             };
 
             final String selectWhere = buildOrWhereString(Favorites.ITEM_TYPE, bindSources);
-            
+
             Cursor c = null;
-            
+
             db.beginTransaction();
             try {
                 // Select and iterate through each matching widget
                 c = db.query(TABLE_FAVORITES, new String[] { Favorites._ID, Favorites.ITEM_TYPE },
                         selectWhere, null, null, null, null);
-                
+
                 if (LOGD) Log.d(TAG, "found upgrade cursor count=" + c.getCount());
-                
+
                 final ContentValues values = new ContentValues();
                 while (c != null && c.moveToNext()) {
                     long favoriteId = c.getLong(0);
@@ -570,7 +570,7 @@ public class LauncherProvider extends ContentProvider {
                     // Allocate and update database with new appWidgetId
                     try {
                         int appWidgetId = mAppWidgetHost.allocateAppWidgetId();
-                        
+
                         if (LOGD) {
                             Log.d(TAG, "allocated appWidgetId=" + appWidgetId
                                     + " for favoriteId=" + favoriteId);
@@ -607,7 +607,7 @@ public class LauncherProvider extends ContentProvider {
                         Log.e(TAG, "Problem allocating appWidgetId", ex);
                     }
                 }
-                
+
                 db.setTransactionSuccessful();
             } catch (SQLException ex) {
                 Log.w(TAG, "Problem while allocating appWidgetIds for existing widgets", ex);
@@ -651,7 +651,7 @@ public class LauncherProvider extends ContentProvider {
 
                     TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.Favorite);
 
-                    values.clear();                    
+                    values.clear();
                     values.put(LauncherSettings.Favorites.CONTAINER,
                             LauncherSettings.Favorites.CONTAINER_DESKTOP);
                     values.put(LauncherSettings.Favorites.SCREEN,
@@ -757,7 +757,7 @@ public class LauncherProvider extends ContentProvider {
                     "com.android.alarmclock.AnalogAppWidgetProvider");
             return addAppWidget(db, values, cn, 2, 2);
         }
-        
+
         private boolean addAppWidget(SQLiteDatabase db, ContentValues values, TypedArray a,
                 PackageManager packageManager) {
 
@@ -788,7 +788,7 @@ public class LauncherProvider extends ContentProvider {
                 int spanY = a.getInt(R.styleable.Favorite_spanY, 0);
                 return addAppWidget(db, values, cn, spanX, spanY);
             }
-            
+
             return false;
         }
 
@@ -799,7 +799,7 @@ public class LauncherProvider extends ContentProvider {
 
             try {
                 int appWidgetId = mAppWidgetHost.allocateAppWidgetId();
-                
+
                 values.put(Favorites.ITEM_TYPE, Favorites.ITEM_TYPE_APPWIDGET);
                 values.put(Favorites.SPANX, spanX);
                 values.put(Favorites.SPANY, spanY);
@@ -807,15 +807,15 @@ public class LauncherProvider extends ContentProvider {
                 db.insert(TABLE_FAVORITES, null, values);
 
                 allocatedAppWidgets = true;
-                
+
                 appWidgetManager.bindAppWidgetId(appWidgetId, cn);
             } catch (RuntimeException ex) {
                 Log.e(TAG, "Problem allocating appWidgetId", ex);
             }
-            
+
             return allocatedAppWidgets;
         }
-        
+
         private boolean addUriShortcut(SQLiteDatabase db, ContentValues values,
                 TypedArray a) {
             Resources r = mContext.getResources();
@@ -853,7 +853,7 @@ public class LauncherProvider extends ContentProvider {
             return true;
         }
     }
-    
+
     /**
      * Build a query string that will match any row where the column matches
      * anything in the values list.
@@ -885,7 +885,7 @@ public class LauncherProvider extends ContentProvider {
                 throw new UnsupportedOperationException("WHERE clause not supported: " + url);
             } else {
                 this.table = url.getPathSegments().get(0);
-                this.where = "_id=" + ContentUris.parseId(url);                
+                this.where = "_id=" + ContentUris.parseId(url);
                 this.args = null;
             }
         }

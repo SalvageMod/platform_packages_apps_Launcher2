@@ -226,7 +226,7 @@ final class Utilities {
                     Bitmap.Config.ARGB_8888);
             final Canvas canvas = sCanvas;
             canvas.setBitmap(disabled);
-            
+
             canvas.drawBitmap(bitmap, 0.0f, 0.0f, sDisabledPaint);
 
             return disabled;

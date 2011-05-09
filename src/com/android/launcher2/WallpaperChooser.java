@@ -114,7 +114,7 @@ public class WallpaperChooser extends Activity implements AdapterView.OnItemSele
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        
+
         if (mLoader != null && mLoader.getStatus() != WallpaperLoader.Status.FINISHED) {
             mLoader.cancel(true);
             mLoader = null;
@@ -179,7 +179,7 @@ public class WallpaperChooser extends Activity implements AdapterView.OnItemSele
             } else {
                 image = (ImageView) convertView;
             }
-            
+
             int thumbRes = mThumbs.get(position);
             image.setImageResource(thumbRes);
             Drawable thumbDrawable = image.getDrawable();
@@ -203,9 +203,9 @@ public class WallpaperChooser extends Activity implements AdapterView.OnItemSele
         WallpaperLoader() {
             mOptions = new BitmapFactory.Options();
             mOptions.inDither = false;
-            mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;            
+            mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
         }
-        
+
         protected Bitmap doInBackground(Integer... params) {
             if (isCancelled()) return null;
             try {
@@ -225,12 +225,12 @@ public class WallpaperChooser extends Activity implements AdapterView.OnItemSele
                 if (mBitmap != null) {
                     mBitmap.recycle();
                 }
-    
+
                 final ImageView view = mImageView;
                 view.setImageBitmap(b);
-    
+
                 mBitmap = b;
-    
+
                 final Drawable drawable = view.getDrawable();
                 drawable.setFilterBitmap(true);
                 drawable.setDither(true);
@@ -239,7 +239,7 @@ public class WallpaperChooser extends Activity implements AdapterView.OnItemSele
 
                 mLoader = null;
             } else {
-               b.recycle(); 
+               b.recycle();
             }
         }
 

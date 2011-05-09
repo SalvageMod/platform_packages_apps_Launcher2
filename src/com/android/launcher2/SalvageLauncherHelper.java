@@ -20,6 +20,6 @@ public final class SalvageLauncherHelper {
 		boolean newD = sp.getBoolean("systemPersistent", context.getResources().getBoolean(R.bool.config_system_persistent));
 		return newD;
 	}
-	
+
 }
 

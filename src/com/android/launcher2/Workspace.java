@@ -60,14 +60,14 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     @SuppressWarnings({"UnusedDeclaration"})
     private static final String TAG = "Launcher.Workspace";
     private static final int INVALID_SCREEN = -1;
-    
+
     /**
      * The velocity at which a fling gesture will cause us to snap to the next screen
      */
     private static final int SNAP_VELOCITY = 600;
 
     private final WallpaperManager mWallpaperManager;
-    
+
     private int mDefaultScreen;
 
     private boolean mFirstLayout = true;
@@ -83,7 +83,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
      * CellInfo for the cell that is currently being dragged
      */
     private CellLayout.CellInfo mDragInfo;
-    
+
     /**
      * Target drop area calculated during last acceptDrop call.
      */
@@ -91,7 +91,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     private float mLastMotionX;
     private float mLastMotionY;
-    
+
     private final static int TOUCH_STATE_REST = 0;
     private final static int TOUCH_STATE_SCROLLING = 1;
 
@@ -102,12 +102,12 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     private Launcher mLauncher;
     private IconCache mIconCache;
     private DragController mDragController;
-    
+
     /**
      * Cache of vacant cells, used during drag events and invalidated as needed.
      */
     private CellLayout.CellInfo mVacantCache = null;
-    
+
     private int[] mTempCell = new int[2];
     private int[] mTempEstimate = new int[2];
 
@@ -115,14 +115,14 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     private int mTouchSlop;
     private int mMaximumVelocity;
-    
+
     private static final int INVALID_POINTER = -1;
 
     private int mActivePointerId = INVALID_POINTER;
-    
+
     private Drawable mPreviousIndicator;
     private Drawable mNextIndicator;
-    
+
     private static final float NANOTIME_DIV = 1000000000.0f;
     private static final float SMOOTHING_SPEED = 0.75f;
     private static final float SMOOTHING_CONSTANT = (float) (0.016 / Math.log(SMOOTHING_SPEED));
@@ -133,7 +133,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     private static final float BASELINE_FLING_VELOCITY = 2500.f;
     private static final float FLING_VELOCITY_INFLUENCE = 0.4f;
-    
+
     private static class WorkspaceOvershootInterpolator implements Interpolator {
         private static final float DEFAULT_TENSION = 1.3f;
         private float mTension;
@@ -141,7 +141,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         public WorkspaceOvershootInterpolator() {
             mTension = DEFAULT_TENSION;
         }
-        
+
         public void setDistance(int distance) {
             mTension = distance > 0 ? DEFAULT_TENSION / distance : DEFAULT_TENSION;
         }
@@ -157,7 +157,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             return t * t * ((mTension + 1) * t + mTension) + 1.0f;
         }
     }
-    
+
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -179,7 +179,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         super(context, attrs, defStyle);
 
         mWallpaperManager = WallpaperManager.getInstance(context);
-        
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Workspace, defStyle, 0);
         mDefaultScreen = a.getInt(R.styleable.Workspace_defaultScreen, 1);
         a.recycle();
@@ -444,7 +444,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         mTouchX = x;
         mSmoothingTime = System.nanoTime() / NANOTIME_DIV;
     }
-    
+
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
@@ -659,7 +659,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         }
 
         acquireVelocityTrackerAndAddMovement(ev);
-        
+
         switch (action & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_MOVE: {
                 /*
@@ -680,9 +680,9 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                 final int touchSlop = mTouchSlop;
                 boolean xMoved = xDiff > touchSlop;
                 boolean yMoved = yDiff > touchSlop;
-                
+
                 if (xMoved || yMoved) {
-                    
+
                     if (xMoved) {
                         // Scroll if the user moved far enough along the X axis
                         mTouchState = TOUCH_STATE_SCROLLING;
@@ -724,20 +724,20 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                
+
                 if (mTouchState != TOUCH_STATE_SCROLLING) {
                     final CellLayout currentScreen = (CellLayout)getChildAt(mCurrentScreen);
                     if (!currentScreen.lastDownOnOccupiedCell()) {
                         getLocationOnScreen(mTempCell);
                         // Send a tap to the wallpaper if the last down was on empty space
                         final int pointerIndex = ev.findPointerIndex(mActivePointerId);
-                        mWallpaperManager.sendWallpaperCommand(getWindowToken(), 
+                        mWallpaperManager.sendWallpaperCommand(getWindowToken(),
                                 "android.wallpaper.tap",
                                 mTempCell[0] + (int) ev.getX(pointerIndex),
                                 mTempCell[1] + (int) ev.getY(pointerIndex), 0, null);
                     }
                 }
-                
+
                 // Release the drag
                 clearChildrenCache();
                 mTouchState = TOUCH_STATE_REST;
@@ -745,7 +745,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                 mAllowLongPress = false;
                 releaseVelocityTracker();
                 break;
-                
+
             case MotionEvent.ACTION_POINTER_UP:
                 onSecondaryPointerUp(ev);
                 break;
@@ -757,7 +757,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
          */
         return mTouchState != TOUCH_STATE_REST;
     }
-    
+
     private void onSecondaryPointerUp(MotionEvent ev) {
         final int pointerIndex = (ev.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >>
                 MotionEvent.ACTION_POINTER_INDEX_SHIFT;
@@ -810,7 +810,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             fromScreen = toScreen;
             toScreen = temp;
         }
-        
+
         final int count = getChildCount();
 
         fromScreen = Math.max(fromScreen, 0);
@@ -835,7 +835,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        
+
         if (mLauncher.isAllAppsVisible()) {
             // Cancel any scrolling that is in progress.
             if (!mScroller.isFinished()) {
@@ -898,11 +898,11 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                 final VelocityTracker velocityTracker = mVelocityTracker;
                 velocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                 final int velocityX = (int) velocityTracker.getXVelocity(mActivePointerId);
-                
+
                 final int screenWidth = getWidth();
                 final int whichScreen = (mScrollX + (screenWidth / 2)) / screenWidth;
                 final float scrolledPos = (float) mScrollX / screenWidth;
-                
+
                 if (velocityX > SNAP_VELOCITY && mCurrentScreen > 0) {
                     // Fling hard enough to move left.
                     // Don't fling across more than one screen at a time.
@@ -940,7 +940,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
         return true;
     }
-    
+
     private void acquireVelocityTrackerAndAddMovement(MotionEvent ev) {
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
@@ -963,7 +963,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         //if (!mScroller.isFinished()) return;
 
         whichScreen = Math.max(0, Math.min(whichScreen, getChildCount() - 1));
-        
+
         clearVacantCache();
         enableChildrenCache(mCurrentScreen, whichScreen);
 
@@ -977,7 +977,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                 focusedChild == getChildAt(mCurrentScreen)) {
             focusedChild.clearFocus();
         }
-        
+
         final int screenDelta = Math.max(1, Math.abs(whichScreen - mCurrentScreen));
         final int newX = whichScreen * getWidth();
         final int delta = newX - mScrollX;
@@ -986,13 +986,13 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         if (!mScroller.isFinished()) {
             mScroller.abortAnimation();
         }
-        
+
         if (settle) {
             mScrollInterpolator.setDistance(screenDelta);
         } else {
             mScrollInterpolator.disableSettle();
         }
-        
+
         velocity = Math.abs(velocity);
         if (velocity > 0) {
             duration += (duration / (velocity / BASELINE_FLING_VELOCITY))
@@ -1008,15 +1008,15 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     void startDrag(CellLayout.CellInfo cellInfo) {
         View child = cellInfo.cell;
-        
+
         // Make sure the drag was started by a long press as opposed to a long click.
         if (!child.isInTouchMode()) {
             return;
         }
-        
+
         mDragInfo = cellInfo;
         mDragInfo.screen = mCurrentScreen;
-        
+
         CellLayout current = ((CellLayout) getChildAt(mCurrentScreen));
 
         current.onDragChild(child);
@@ -1063,7 +1063,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
             // Move internally
             if (mDragInfo != null) {
                 final View cell = mDragInfo.cell;
-                int index = mScroller.isFinished() ? mCurrentScreen : mNextScreen;                
+                int index = mScroller.isFinished() ? mCurrentScreen : mNextScreen;
                 if (index != mDragInfo.screen) {
                     final CellLayout originalCellLayout = (CellLayout) getChildAt(mDragInfo.screen);
                     originalCellLayout.removeView(cell);
@@ -1098,7 +1098,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     private void onDropExternal(int x, int y, Object dragInfo, CellLayout cellLayout) {
         onDropExternal(x, y, dragInfo, cellLayout, false);
     }
-    
+
     private void onDropExternal(int x, int y, Object dragInfo, CellLayout cellLayout,
             boolean insertAtFirst) {
         // Drag from somewhere else
@@ -1137,7 +1137,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         LauncherModel.addOrMoveItemInDatabase(mLauncher, info,
                 LauncherSettings.Favorites.CONTAINER_DESKTOP, mCurrentScreen, lp.cellX, lp.cellY);
     }
-    
+
     /**
      * Return the current {@link CellLayout}, correctly picking the destination
      * screen while a scroll is in progress.
@@ -1164,37 +1164,37 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
         return mVacantCache.findCellForSpan(mTempEstimate, spanX, spanY, false);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public Rect estimateDropLocation(DragSource source, int x, int y,
             int xOffset, int yOffset, DragView dragView, Object dragInfo, Rect recycle) {
         final CellLayout layout = getCurrentDropLayout();
-        
+
         final CellLayout.CellInfo cellInfo = mDragInfo;
         final int spanX = cellInfo == null ? 1 : cellInfo.spanX;
         final int spanY = cellInfo == null ? 1 : cellInfo.spanY;
         final View ignoreView = cellInfo == null ? null : cellInfo.cell;
-        
+
         final Rect location = recycle != null ? recycle : new Rect();
-        
+
         // Find drop cell and convert into rectangle
         int[] dropCell = estimateDropCell(x - xOffset, y - yOffset,
                 spanX, spanY, ignoreView, layout, mTempCell);
-        
+
         if (dropCell == null) {
             return null;
         }
-        
+
         layout.cellToPoint(dropCell[0], dropCell[1], mTempEstimate);
         location.left = mTempEstimate[0];
         location.top = mTempEstimate[1];
-        
+
         layout.cellToPoint(dropCell[0] + spanX, dropCell[1] + spanY, mTempEstimate);
         location.right = mTempEstimate[0];
         location.bottom = mTempEstimate[1];
-        
+
         return location;
     }
 
@@ -1212,7 +1212,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         return layout.findNearestVacantArea(pixelX, pixelY,
                 spanX, spanY, mVacantCache, recycle);
     }
-    
+
     void setLauncher(Launcher launcher) {
         mLauncher = launcher;
     }
@@ -1248,7 +1248,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         if (mScroller.isFinished()) {
             if (mCurrentScreen > 0) snapToScreen(mCurrentScreen - 1);
         } else {
-            if (mNextScreen > 0) snapToScreen(mNextScreen - 1);            
+            if (mNextScreen > 0) snapToScreen(mNextScreen - 1);
         }
     }
 
@@ -1257,7 +1257,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
         if (mScroller.isFinished()) {
             if (mCurrentScreen < getChildCount() -1) snapToScreen(mCurrentScreen + 1);
         } else {
-            if (mNextScreen < getChildCount() -1) snapToScreen(mNextScreen + 1);            
+            if (mNextScreen < getChildCount() -1) snapToScreen(mNextScreen + 1);
         }
     }
 
@@ -1315,7 +1315,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     public boolean allowLongPress() {
         return mAllowLongPress;
     }
-    
+
     /**
      * Set true to allow long-press events to be triggered, usually checked by
      * {@link Launcher} to accept or block dpad-initiated long-presses.
@@ -1343,17 +1343,17 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                 public void run() {
                     final ArrayList<View> childrenToRemove = new ArrayList<View>();
                     childrenToRemove.clear();
-        
+
                     int childCount = layout.getChildCount();
                     for (int j = 0; j < childCount; j++) {
                         final View view = layout.getChildAt(j);
                         Object tag = view.getTag();
-        
+
                         if (tag instanceof ShortcutInfo) {
                             final ShortcutInfo info = (ShortcutInfo) tag;
                             final Intent intent = info.intent;
                             final ComponentName name = intent.getComponent();
-        
+
                             if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
                                 for (String packageName: packageNames) {
                                     if (packageName.equals(name.getPackageName())) {
@@ -1368,12 +1368,12 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                             final ArrayList<ShortcutInfo> toRemove = new ArrayList<ShortcutInfo>(1);
                             final int contentsCount = contents.size();
                             boolean removedFromFolder = false;
-        
+
                             for (int k = 0; k < contentsCount; k++) {
                                 final ShortcutInfo appInfo = contents.get(k);
                                 final Intent intent = appInfo.intent;
                                 final ComponentName name = intent.getComponent();
-        
+
                                 if (Intent.ACTION_MAIN.equals(intent.getAction()) && name != null) {
                                     for (String packageName: packageNames) {
                                         if (packageName.equals(name.getPackageName())) {
@@ -1384,7 +1384,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                                     }
                                 }
                             }
-        
+
                             contents.removeAll(toRemove);
                             if (removedFromFolder) {
                                 final Folder folder = getOpenFolder();
@@ -1400,7 +1400,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                                 for (String packageName: packageNames) {
                                     if (packageName.equals(providerInfo.packageName)) {
                                         LauncherModel.deleteItemFromDatabase(mLauncher, info);
-                                        childrenToRemove.add(view);                        
+                                        childrenToRemove.add(view);
                                     }
                                 }
                             }
@@ -1412,13 +1412,13 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                                 for (String packageName: packageNames) {
                                     if (packageName.equals(provider.provider.getPackageName())) {
                                         LauncherModel.deleteItemFromDatabase(mLauncher, info);
-                                        childrenToRemove.add(view);                                
+                                        childrenToRemove.add(view);
                                     }
                                 }
                             }
                         }
                     }
-        
+
                     childCount = childrenToRemove.size();
                     for (int j = 0; j < childCount; j++) {
                         View child = childrenToRemove.get(j);
@@ -1427,7 +1427,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
                             mDragController.removeDropTarget((DropTarget)child);
                         }
                     }
-        
+
                     if (childCount > 0) {
                         layout.requestLayout();
                         layout.invalidate();

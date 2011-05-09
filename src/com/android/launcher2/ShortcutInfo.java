@@ -67,7 +67,7 @@ class ShortcutInfo extends ItemInfo {
     ShortcutInfo() {
         itemType = LauncherSettings.BaseLauncherColumns.ITEM_TYPE_SHORTCUT;
     }
-    
+
     public ShortcutInfo(ShortcutInfo info) {
         super(info);
         title = info.title.toString();

@@ -67,7 +67,7 @@ public class DragView extends View implements TweenCallback {
         super(context);
 
         mWindowManager = WindowManagerImpl.getDefault();
-        
+
         mTween = new SymmetricalLinearTween(false, 110 /*ms duration*/, this);
 
         Matrix scale = new Matrix();
@@ -161,7 +161,7 @@ public class DragView extends View implements TweenCallback {
         mAnimationScale = 1.0f/mScale;
         mTween.start(true);
     }
-    
+
     /**
      * Move the window containing this view.
      *

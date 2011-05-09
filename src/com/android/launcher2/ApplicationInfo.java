@@ -91,7 +91,7 @@ class ApplicationInfo extends ItemInfo {
     }
 
     Intent.ShortcutIconResource iconResource;
-    
+
     public ApplicationInfo(ApplicationInfo info) {
         super(info);
         componentName = info.componentName;

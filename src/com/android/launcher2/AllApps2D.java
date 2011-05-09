@@ -69,7 +69,7 @@ public class AllApps2D
     private AppsAdapter mAppsAdapter;
 
     // ------------------------------------------------------------
-    
+
     public static class HomeButton extends ImageButton {
         public HomeButton(Context context, AttributeSet attrs) {
             super(context, attrs);
@@ -104,7 +104,7 @@ public class AllApps2D
 
             final TextView textView = (TextView) convertView;
             if (DEBUG) {
-                Log.d(TAG, "icon bitmap = " + info.iconBitmap 
+                Log.d(TAG, "icon bitmap = " + info.iconBitmap
                     + " density = " + info.iconBitmap.getDensity());
             }
             info.iconBitmap.setDensity(Bitmap.DENSITY_NONE);
@@ -135,7 +135,7 @@ public class AllApps2D
             mGrid.setOnItemLongClickListener(this);
             mGrid.setBackgroundColor(Color.BLACK);
             mGrid.setCacheColorHint(Color.BLACK);
-            
+
             ImageButton homeButton = (ImageButton) findViewWithTag("all_apps_2d_home");
             if (homeButton == null) throw new Resources.NotFoundException();
             homeButton.setOnClickListener(
@@ -313,7 +313,7 @@ public class AllApps2D
     public void dumpState() {
         ApplicationInfo.dumpApplicationInfoList(TAG, "mAllAppsList", mAllAppsList);
     }
-    
+
     public void surrender() {
     }
 }

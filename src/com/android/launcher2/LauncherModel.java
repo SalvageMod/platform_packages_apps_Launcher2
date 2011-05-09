@@ -309,7 +309,7 @@ public class LauncherModel extends BroadcastReceiver {
      */
     public void onReceive(Context context, Intent intent) {
         if (DEBUG_LOADERS) Log.d(TAG, "onReceive intent=" + intent);
-        
+
         final String action = intent.getAction();
 
         if (Intent.ACTION_PACKAGE_CHANGED.equals(action)
@@ -474,7 +474,7 @@ public class LauncherModel extends BroadcastReceiver {
                 }
                 if (DEBUG_LOADERS) {
                     Log.d(TAG, "waited "
-                            + (SystemClock.uptimeMillis()-workspaceWaitTime) 
+                            + (SystemClock.uptimeMillis()-workspaceWaitTime)
                             + "ms for previous step to finish binding");
                 }
             }
@@ -601,9 +601,9 @@ public class LauncherModel extends BroadcastReceiver {
                 for (int y = item.cellY; y < (item.cellY+item.spanY); y++) {
                     if (occupied[item.screen][x][y] != null) {
                         Log.e(TAG, "Error loading shortcut " + item
-                            + " into cell (" + item.screen + ":" 
+                            + " into cell (" + item.screen + ":"
                             + x + "," + y
-                            + ") occupied by " 
+                            + ") occupied by "
                             + occupied[item.screen][x][y]);
                         return false;
                     }
@@ -825,7 +825,7 @@ public class LauncherModel extends BroadcastReceiver {
 
                             final AppWidgetProviderInfo provider =
                                     widgets.getAppWidgetInfo(appWidgetId);
-                            
+
                             if (!isSafeMode && (provider == null || provider.provider == null ||
                                     provider.provider.getPackageName() == null)) {
                                 Log.e(TAG, "Deleting widget that isn't installed anymore: id="

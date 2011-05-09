@@ -58,7 +58,7 @@ public class FolderIcon extends BubbleTextView implements DropTarget {
         icon.setOnClickListener(launcher);
         icon.mInfo = folderInfo;
         icon.mLauncher = launcher;
-        
+
         return icon;
     }
 

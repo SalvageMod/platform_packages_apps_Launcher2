@@ -26,7 +26,7 @@ public interface DropTarget {
 
     /**
      * Handle an object being dropped on the DropTarget
-     * 
+     *
      * @param source DragSource where the drag started
      * @param x X coordinate of the drop location
      * @param y Y coordinate of the drop location
@@ -36,11 +36,11 @@ public interface DropTarget {
      *          touch happened
      * @param dragView The DragView that's being dragged around on screen.
      * @param dragInfo Data associated with the object being dragged
-     * 
+     *
      */
     void onDrop(DragSource source, int x, int y, int xOffset, int yOffset,
             DragView dragView, Object dragInfo);
-    
+
     void onDragEnter(DragSource source, int x, int y, int xOffset, int yOffset,
             DragView dragView, Object dragInfo);
 
@@ -54,7 +54,7 @@ public interface DropTarget {
      * Check if a drop action can occur at, or near, the requested location.
      * This may be called repeatedly during a drag, so any calls should return
      * quickly.
-     * 
+     *
      * @param source DragSource where the drag started
      * @param x X coordinate of the drop location
      * @param y Y coordinate of the drop location
@@ -72,7 +72,7 @@ public interface DropTarget {
     /**
      * Estimate the surface area where this object would land if dropped at the
      * given location.
-     * 
+     *
      * @param source DragSource where the drag started
      * @param x X coordinate of the drop location
      * @param y Y coordinate of the drop location

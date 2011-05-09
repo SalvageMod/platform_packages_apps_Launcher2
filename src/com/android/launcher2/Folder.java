@@ -39,13 +39,13 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
 
     protected AbsListView mContent;
     protected DragController mDragController;
-    
+
     protected Launcher mLauncher;
 
     protected Button mCloseButton;
-    
+
     protected FolderInfo mInfo;
-    
+
     /**
      * Which item is being dragged
      */
@@ -69,12 +69,12 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
         mContent = (AbsListView) findViewById(R.id.folder_content);
         mContent.setOnItemClickListener(this);
         mContent.setOnItemLongClickListener(this);
-        
+
         mCloseButton = (Button) findViewById(R.id.folder_close);
         mCloseButton.setOnClickListener(this);
         mCloseButton.setOnLongClickListener(this);
     }
-    
+
     public void onItemClick(AdapterView parent, View v, int position, long id) {
         ShortcutInfo app = (ShortcutInfo) parent.getItemAtPosition(position);
         int[] pos = new int[2];
@@ -132,7 +132,7 @@ public class Folder extends LinearLayout implements DragSource, OnItemLongClickL
     void setLauncher(Launcher launcher) {
         mLauncher = launcher;
     }
-    
+
     /**
      * @return the FolderInfo object associated with this folder
      */
