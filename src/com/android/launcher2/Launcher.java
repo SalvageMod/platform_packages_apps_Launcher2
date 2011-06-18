@@ -607,7 +607,7 @@ public final class Launcher extends Activity
 		}
 
 
-        Workspace.WALLPAPER_SCROLLING = mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_WALLPAPER_SCROLLING, true);
+        Workspace.WALLPAPER_SCROLLING = mPrefs.getBoolean(LauncherPreferenceActivity.LAUNCHER_WALLPAPER_SCROLLING, false);
 
         if (mRestoring || mOnResumeNeedsLoad) {
             mWorkspaceLoading = true;
