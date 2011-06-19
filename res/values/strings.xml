@@ -168,4 +168,18 @@
     <string name="pref_title_orientation">Launcher rotation</string>
     <string name="pref_sum_orientation">Enable/disable launcher rotation</string>
 
+    <!-- Screens -->
+    <string name="pref_screen_desk_title">Desktop screen settings</string>
+    <string name="pref_screen_desk_summary">Screen count</string>
+    <string name="homescreen_elements">Home Screens</string>
+    <string name="homescreen_elements_about">Select number of home screens</string>
+    <string name="choose_num_screens">Choose the number of home screens</string>
+    <string name="three_screens">Three screens</string>
+    <string name="five_screens">Five screens</string>
+    <string name="seven_screens">Seven screens</string>
+    
+    <string name="number_screens_title">Change the number of screens</string>
+    <string name="screen_changer_title">Screen number</string>
+    <string name="screen_changer_title_summary">Set the number of screens</string>
+
 </resources>

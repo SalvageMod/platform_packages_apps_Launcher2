@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import android.provider.Settings.SettingNotFoundException;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParser;
 
@@ -71,6 +72,10 @@ public class LauncherProvider extends ContentProvider {
 
     static final String TABLE_FAVORITES = "favorites";
     static final String PARAMETER_NOTIFY = "notify";
+
+    //Screen Settings
+    public static final String SCREENSETTINGS = "NUM_SCREENS";
+    static int mNumScreen;
 
     /**
      * {@link Uri} triggered at any registered {@link android.database.ContentObserver} when
@@ -631,8 +636,8 @@ public class LauncherProvider extends ContentProvider {
 
             PackageManager packageManager = mContext.getPackageManager();
             int i = 0;
-            try {
-                XmlResourceParser parser = mContext.getResources().getXml(R.xml.default_workspace);
+            try {  
+                XmlResourceParser parser = getDefaultWorkspace();
                 AttributeSet attrs = Xml.asAttributeSet(parser);
                 XmlUtils.beginDocument(parser, TAG_FAVORITES);
 
@@ -685,6 +690,33 @@ public class LauncherProvider extends ContentProvider {
 
             return i;
         }
+
+private XmlResourceParser getDefaultWorkspace(){
+
+  try{
+    mNumScreen = Settings.System.getInt( mContext.getContentResolver() , SCREENSETTINGS);
+
+  } catch (SettingNotFoundException e) {
+
+  e.printStackTrace();
+  mNumScreen = 3;
+
+    }
+ 
+  if( mNumScreen == 3)
+  {
+  return mContext.getResources().getXml(R.xml.default_workspace_3);
+  }
+  else if(mNumScreen == 5)
+  {
+  return mContext.getResources().getXml(R.xml.default_workspace_5);
+  }
+  else
+  {
+  return mContext.getResources().getXml(R.xml.default_workspace_7);
+  }
+
+}
 
         private boolean addAppShortcut(SQLiteDatabase db, ContentValues values, TypedArray a,
                 PackageManager packageManager, Intent intent) {

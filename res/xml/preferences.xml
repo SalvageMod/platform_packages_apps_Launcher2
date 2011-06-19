@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
     <PreferenceCategory
 	android:title="@string/ui_launcher_settings">
-
+    <!-- Launcher fullscreen -->
     <CheckBoxPreference android:key="pref_key_launcher_fullscreen"
        android:title="@string/pref_title_launcher_fullscreen"
        android:summary="@string/pref_summary_launcher_fullscreen"
        android:defaultValue="false" />
-
     <!-- Launcher orientation -->
     <CheckBoxPreference
        android:key="pref_key_launcher_orientation"
        android:title="@string/pref_title_orientation"
        android:summary="@string/pref_sum_orientation"
        android:defaultValue="false" />
-
-    <CheckBoxPreference android:key="pref_key_launcher_wallpaper_scrolling"
-                        android:title="@string/pref_title_wallpaper_scrolling"
-                        android:summary="@string/pref_summary_wallpaper_scrolling"
-                        android:defaultValue="false" />
-
+    <!-- Wallpaper scrolling -->
+    <CheckBoxPreference 
+	android:key="pref_key_launcher_wallpaper_scrolling"
+	android:title="@string/pref_title_wallpaper_scrolling"
+	android:summary="@string/pref_summary_wallpaper_scrolling"
+	android:defaultValue="false" />
     </PreferenceCategory>
-
+    <!-- Icons prefs -->
     <PreferenceCategory
         android:title="@string/pref_icon_settings">
-
+    <!-- Hide lables -->
     <CheckBoxPreference android:key="pref_key_launcher_hide_labels"
        android:title="@string/pref_title_hide_labels"
        android:summary="@string/pref_summary_hide_labels"
        android:defaultValue="false" />
-
      </PreferenceCategory>
-
+<!-- Desktop screen mods -->
+<PreferenceScreen 
+	android:title="@string/pref_screen_desk_title"
+	android:summary="@string/pref_screen_desk_summary" >
+     <CheckBoxPreference
+	android:key="screen_changer" 
+	android:title="@string/screen_changer_title" 
+	android:summary="@string/screen_changer_title_summary"
+	android:enabled="true" />
+    <PreferenceCategory
+    	android:key="@+id/number_screens" 	
+    	android:title="@string/number_screens_title"
+    	android:enabled="true"
+    	android:disableDependentsState="true">
+    <ListPreference
+	android:key="num_screens"	
+	android:dependency="screen_changer"					
+ 	android:title="@string/homescreen_elements"
+	android:summary="@string/homescreen_elements_about"		 	  		
+	android:entries="@array/number_of_screens"
+	android:entryValues="@array/number_of_screens_value" />
+    </PreferenceCategory>
+</PreferenceScreen>
 </PreferenceScreen>
