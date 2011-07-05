@@ -76,7 +76,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
 
     private int mCurrentScreen;
     private int mNextScreen = INVALID_SCREEN;
-    private CustomScroller mScroller;
+    private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
 
     /**
@@ -194,7 +194,7 @@ public class Workspace extends ViewGroup implements DropTarget, DragSource, Drag
     private void initWorkspace() {
         Context context = getContext();
         mScrollInterpolator = new WorkspaceOvershootInterpolator();
-        mScroller = new CustomScroller(getContext(), new ElasticInterpolator(5f));
+        mScroller = new Scroller(context, mScrollInterpolator);
         mCurrentScreen = mDefaultScreen;
         Launcher.setScreen(mCurrentScreen);
         LauncherApplication app = (LauncherApplication)context.getApplicationContext();
